@@ -3,23 +3,19 @@ module V1
     before_action :check_secret
 
     def callback
-      @webhook = Webhook.new(event: @event, body: webhook_params.to_json)
-      save_callback
+      attributes = { event: event, body: params }
+      callback = CallbackService.new(attributes)
+      callback.save if callback.valid?
     end
 
     private
 
-    def save_callback
-      @webhook.save
-    end
-
-    def webhook_params
+    def event
       event_payload = ''
-      Webhook.events.keys.each do |event|
-        @event = event
+      Event.events.keys.each do |event|
         event_payload = event if params.keys.include?(event)
       end
-      params.require(event_payload.to_sym)
+      event_payload
     end
 
   end

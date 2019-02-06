@@ -12,35 +12,35 @@
 
 ActiveRecord::Schema.define(version: 20190206003106) do
 
-  create_table "organizations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.json "body"
-    t.bigint "webhook_id"
+    t.integer "event"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["webhook_id"], name: "index_organizations_on_webhook_id"
+  end
+
+  create_table "organizations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.json "body"
+    t.bigint "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_organizations_on_event_id"
   end
 
   create_table "repositories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.json "body"
-    t.bigint "webhook_id"
+    t.bigint "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["webhook_id"], name: "index_repositories_on_webhook_id"
+    t.index ["event_id"], name: "index_repositories_on_event_id"
   end
 
   create_table "senders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.json "body"
-    t.bigint "webhook_id"
+    t.bigint "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["webhook_id"], name: "index_senders_on_webhook_id"
-  end
-
-  create_table "webhooks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.json "body"
-    t.string "event"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_senders_on_event_id"
   end
 
 end
