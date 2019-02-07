@@ -3,14 +3,18 @@ module V1
     before_action :check_secret
 
     def callback
-      attributes = { event: event, body: params }
-      callback = CallbackService.new(attributes)
-      callback.save if callback.valid?
+      attributes = { event: event_name, body: params }
+      callback = CallbackIssueService.new(attributes)
+      return render nothing: true, status: 500 unless callback.valid?
+
+      callback.save
+
+      render nothing: true, status: 200
     end
 
     private
 
-    def event
+    def event_name
       event_payload = ''
       Event.events.keys.each do |event|
         event_payload = event if params.keys.include?(event)
