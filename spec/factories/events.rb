@@ -9,4 +9,8 @@ FactoryBot.define do
     repositories
   end
 
+  trait :issue do
+    body { { "issue"=>{"url"=> "https://google.com.br"} } }
+  end
+
 end

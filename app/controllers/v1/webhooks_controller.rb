@@ -5,11 +5,10 @@ module V1
     def callback
       attributes = { event: event_name, body: params }
       callback = CallbackIssueService.new(attributes)
-      return render nothing: true, status: 500 unless callback.valid?
+      return json_response(@events, :internal_server_error) unless callback.valid?
 
       callback.save
-
-      render nothing: true, status: 200
+      json_response(@events, :created)
     end
 
     private
