@@ -3783,3 +3783,81 @@ Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2019-02-07 13:54:52 -020
 Started GET "/api-docs/v1/swagger.json" for 127.0.0.1 at 2019-02-07 13:54:53 -0200
 Started GET "/api-docs/favicon-32x32.png" for 127.0.0.1 at 2019-02-07 13:54:53 -0200
 Started GET "/api-docs/favicon-16x16.png" for 127.0.0.1 at 2019-02-07 13:54:53 -0200
+  [1m[35m (39.7ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (6.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (55.8ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[35m (20.8ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[35m (4.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (12.7ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[35m (41.1ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (1334.7ms)[0m  [1m[35mDROP DATABASE IF EXISTS `octo_development`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (139.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS `octo_test`[0m
+  [1m[35m (0.7ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (69.9ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY) ENGINE=InnoDB[0m
+  [1m[35m (29.0ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (2.5ms)[0m  [1m[34mSELECT GET_LOCK('1918230513352316940', 0)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreateEvents (20190205221430)
+  [1m[35m (31.3ms)[0m  [1m[35mCREATE TABLE `events` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `body` json, `event` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (24.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (3.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190205221430')[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSenders (20190206002623)
+  [1m[35m (49.1ms)[0m  [1m[35mCREATE TABLE `senders` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `body` json, `event_id` bigint, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_senders_on_event_id`  (`event_id`)) ENGINE=InnoDB[0m
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190206002623')[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateOrganizations (20190206003010)
+  [1m[35m (31.3ms)[0m  [1m[35mCREATE TABLE `organizations` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `body` json, `event_id` bigint, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_organizations_on_event_id`  (`event_id`)) ENGINE=InnoDB[0m
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190206003010')[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateRepositories (20190206003106)
+  [1m[35m (65.8ms)[0m  [1m[35mCREATE TABLE `repositories` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `body` json, `event_id` bigint, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_repositories_on_event_id`  (`event_id`)) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190206003106')[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (1.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (4.2ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2019-02-07 19:51:38', '2019-02-07 19:51:38')[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (2.6ms)[0m  [1m[34mSELECT RELEASE_LOCK('1918230513352316940')[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Started GET "/rails/info/routes" for 127.0.0.1 at 2019-02-07 17:51:59 -0200
+  [1m[35m (6.6ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by Rails::InfoController#routes as HTML
+  Rendering /Users/macbook/.rvm/gems/ruby-2.4.1/gems/railties-5.1.6.1/lib/rails/templates/rails/info/routes.html.erb within layouts/application
+  Rendered collection of /Users/macbook/.rvm/gems/ruby-2.4.1/gems/actionpack-5.1.6.1/lib/action_dispatch/middleware/templates/routes/_route.html.erb [5 times] (14.9ms)
+  Rendered collection of /Users/macbook/.rvm/gems/ruby-2.4.1/gems/actionpack-5.1.6.1/lib/action_dispatch/middleware/templates/routes/_route.html.erb [0 times] (0.0ms)
+  Rendered collection of /Users/macbook/.rvm/gems/ruby-2.4.1/gems/actionpack-5.1.6.1/lib/action_dispatch/middleware/templates/routes/_route.html.erb [0 times] (0.0ms)
+  Rendered /Users/macbook/.rvm/gems/ruby-2.4.1/gems/actionpack-5.1.6.1/lib/action_dispatch/middleware/templates/routes/_table.html.erb (12.0ms)
+  Rendered /Users/macbook/.rvm/gems/ruby-2.4.1/gems/railties-5.1.6.1/lib/rails/templates/rails/info/routes.html.erb within layouts/application (49.5ms)
+Completed 200 OK in 77ms (Views: 70.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/v1/events" for 127.0.0.1 at 2019-02-07 17:52:13 -0200
+Processing by V1::EventsController#index as HTML
+  [1m[35m (3.6ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[36mEvent Load (3.7ms)[0m  [1m[34mSELECT  `events`.* FROM `events` LIMIT 25 OFFSET 0[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.25ms)
+Completed 200 OK in 127ms (Views: 62.2ms | ActiveRecord: 8.7ms)
+
+
+Started GET "/v1/events" for 127.0.0.1 at 2019-02-07 17:52:22 -0200
+Processing by V1::EventsController#index as HTML
+  [1m[36mEvent Load (2.9ms)[0m  [1m[34mSELECT  `events`.* FROM `events` LIMIT 25 OFFSET 0[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.34ms)
+Completed 200 OK in 79ms (Views: 64.4ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2019-02-07 17:52:38 -0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2019-02-07 17:52:39 -0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2019-02-07 17:52:39 -0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2019-02-07 17:52:39 -0200
+Started GET "/api-docs/swagger-ui.css.map" for 127.0.0.1 at 2019-02-07 17:52:39 -0200
+Started GET "/api-docs/v1/swagger.json" for 127.0.0.1 at 2019-02-07 17:52:40 -0200
+Started GET "/api-docs/swagger-ui-bundle.js.map" for 127.0.0.1 at 2019-02-07 17:52:40 -0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js.map" for 127.0.0.1 at 2019-02-07 17:52:40 -0200

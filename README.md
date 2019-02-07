@@ -56,3 +56,49 @@ The Events endpoint will expose the persist the events by an api that will filte
     - `rails s -p 3000 -b '0.0.0.0'`
 * We'll run your code with Ruby 2.5.1;
 * Success and have fun :-)
+
+## Configurações do ambiente
+
+* Ruby version 2.5.1
+* Rails version 5.1.6.1
+* Banco de dados: MySQL 5.7.20
+
+## Ambiente de Desenvolvimento
+
+* Alterar arquivo database.yml.sample para database.yml com as configurações do seu banco de dados.
+* bundle install
+* rails db:create
+* rails db:migrate
+* Configurar o segredo do webhook
+   - `Incluir a chave secret no arquivo 'config/secret_github.yml' de acordo com a chave configurada no github`
+```
+   default: &default
+     secret:
+   
+   development:
+     <<: *default
+   
+   test:
+     <<: *default
+   
+   production:
+     <<: *default
+
+```
+
+* Gerar documentação swagger: 
+    - `rails rswag:specs:swaggerize`
+    
+* rails s -p 3000
+* Acessar URL com apis documentadas: 
+    - `http://localhost:3000/api-docs/index.html`
+
+
+![alt text](imgs/swagger.png)
+
+## Testes unitários
+
+* rodar todos os testes:
+    - `rspec .`
+* Cobertura de testes:  
+    - `Abrir arquivo coverage/index.html`
