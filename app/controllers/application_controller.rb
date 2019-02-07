@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+  include Response
 
   def check_secret
     signature = 'sha1=' + OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha1'), SECRET['secret'],

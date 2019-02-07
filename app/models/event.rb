@@ -11,5 +11,5 @@ class Event < ApplicationRecord
 
   enum event: [:issue]
 
-  scope :issue_by_number, ->(number) { where("body->'$.number'", number: number ) }
+  scope :issue_by_number, ->(number) { where("body->'$.number' = :number", number: number.to_i ) }
 end
